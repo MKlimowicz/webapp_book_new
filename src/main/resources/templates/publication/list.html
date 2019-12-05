@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+<body>
+
+<div class="container">
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+            <th scope="col">publisher</th>
+            <th scope="col">year</th>
+            <th scope="col">type</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Borrow</th>
+            <th scope="col">BorrowHistory</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${publications}">
+            <th scope="row" th:text="${p.id}"></th>
+            <td th:text="${p.title}"></td>
+            <td th:text="${p.publisher}"></td>
+            <td th:text="${p.year}"></td>
+            <td th:text="${p.type}"></td>
+            <td><a class="btn btn-danger" th:href="@{'/publication/' + ${p.id} + '/' + ${p.type} + '/edit'}">Edit</a></td>
+            <td><a class="btn btn-success" th:href="@{'/publication/' + ${p.id} + '/' + ${p.type} + '/borrow'}">borrowBook</a></td>
+            <td><a class="btn btn-danger" th:href="@{'/book/' + ${p.id} + '/userBorrow'}">BorrowHistory</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a type="button" class="btn btn-success" th:href="@{'/publication/list'+${'?type=book'}}">Show only book</a>
+        <a type="button" class="btn btn-warning" th:href="@{'/publication/list'+${'?type=magazine'}}">Show only magazine</a>
+        <a type="button" class="btn btn-primary" th:href="@{'/publication/list'}">Show all publication</a>
+    </div>
+    <button id="btnGroupDrop1" type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Add
+    </button>
+    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item btn " th:href="@{'/book/add'}">Book</a>
+        <a class="dropdown-item btn" th:href="@{'/magazine/add'}">Magazine</a>
+    </div>
+
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
